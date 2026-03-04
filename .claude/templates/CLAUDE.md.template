@@ -1,0 +1,62 @@
+# CLAUDE.md
+
+**Project**: [PROJECT_NAME]
+**Description**: [Brief project description]
+
+## Context Loading (On-Demand Only)
+**Status**: @.claude/context/learning-progress.md
+**Curriculum**: @.claude/context/curriculum-outline.md
+**Developer**: @.claude/context/developer-profile.md
+**Git Guide**: @.learning/guides/git-guide.md
+
+## Agents (Delegate via Task tool)
+**Index**: @.claude/agents/README.md (selection guide)
+**Git**: @.claude/agents/git-manager.md (complex: conflicts, rebase, PRs)
+**Docs**: @.claude/agents/documentation.md (progress updates)
+**Debugger**: @.claude/agents/debugger.md (bugs, systematic debugging, spawn as teammate)
+
+## Always Active
+**Output Style**: @.claude/output-styles/teaching-mentor.md
+**Learning Rules**: @.claude/rules/learning-workflow.md
+
+## Reference Documentation (Load On-Demand)
+**Index**: @.claude/context/reference/README.md (load FIRST to pick correct reference)
+
+## Skills (Claude can invoke proactively or user can request)
+**Index**: @.claude/skills/README.md (skill discovery)
+
+| Command | Purpose |
+|---------|---------|
+| `/lesson-start` | Full session initialization |
+| `/progress-review` | Spaced repetition review |
+| `/commit` | Quick git commits with conversation context |
+| `/testing-patterns` | Testing standards reference |
+| `/educational-workflow` | Session structure and checkpoint patterns |
+| `/docs-audit` | Audit documentation architecture |
+
+## Stack & Patterns
+**Tech**: [TO BE FILLED - e.g., SvelteKit + Tailwind + Postgres]
+**Hosting**: [TO BE FILLED - e.g., Cloudflare Pages + Neon]
+**Workflow**: Subagent delegation + educational git commits
+
+## Context Management -- DELEGATE AGGRESSIVELY
+**Main context fills fast.** Default to delegating work to agents/teammates rather than doing it inline.
+
+- **Any multi-step investigation** -> Delegate to agent or spawn teammate
+- **Git routing** (see rules/learning-workflow.md):
+  - Read-only (status/log/diff) -> Direct execution
+  - Simple commits -> `/commit` skill (has conversation context)
+  - Complex (conflicts/rebase/PRs) -> git-manager agent
+- **Documentation** -> documentation agent
+- **Research / codebase exploration** -> Explore subagent
+- **Debugging sessions** -> Spawn debugging teammate
+
+**Rule of thumb**: If a task will take more than 2-3 tool calls to complete, delegate it.
+
+## Detailed Context
+- @.claude/context/progress-tracking.md - Spaced repetition tracking
+- @.claude/context/learning-phases.md - Phase definitions
+- @.claude/context/project-specs.md - Architecture + setup + tech specs
+
+## Session Behavior
+**Rules**: @.claude/rules/learning-workflow.md (teaching protocols, note-taking, lesson delivery)
