@@ -23,6 +23,19 @@ Scaffolds `.claude/context/`, `.learning/`, and `CLAUDE.md` for a new project us
 
 ## Workflow
 
+### Phase 0: Quick State Check (ONE command only)
+
+Run a single command to check initialization state:
+```bash
+ls ./CLAUDE.md .claude/context/learning-progress.md .learning/guides/git-guide.md 2>&1
+```
+
+- If all three exist: project is already initialized. Tell the user and stop.
+- If some exist: partial init. Tell the user which parts exist and offer to complete the rest.
+- If none exist (expected for a fresh clone): proceed directly to Phase 1. **Do not explore further** — the templates are known to exist in `.claude/templates/` because they're part of this repo.
+
+**Do NOT run multiple ls/find/test commands to explore the project structure.** The directory layout is documented in this file and the README. Just check the three sentinel files above and move on to the interview.
+
 ### Phase 1: Developer Profile Interview
 
 Ask the user about themselves so the teaching/learning system can calibrate appropriately. Use AskUserQuestion for structured choices and follow up conversationally for details.
