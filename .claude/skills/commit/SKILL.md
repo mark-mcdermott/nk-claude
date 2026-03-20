@@ -8,106 +8,57 @@ examples:
   - /commit experiment
 allowed-tools:
   - Bash(git:*)
-  - Bash(gh:*)
   - Read
 ---
 
 # Commit Skill
 
-Quick commits that leverage conversation context. For complex git operations (merge conflicts, rebasing, branch strategy), delegate to git-manager agent instead.
+Quick commits that leverage conversation context. Just stage, commit, and push — no PR creation. Use `/cap` when the work is done and needs a PR.
 
-## When to Use
+## Workflow
 
-| Situation | Use This | Use git-manager Agent |
-|-----------|----------|----------------------|
-| Simple commit after work | yes | no |
-| Checkpoint/milestone | yes | no |
-| Merge conflict | no | yes |
-| Rebase/history rewrite | no | yes |
-| Branch strategy decisions | no | yes |
+### 1. Pre-Commit Checks
+Run the project's typecheck, lint, and test commands (check package.json or project config for available scripts).
+Fix any issues before proceeding.
 
-## Quick Workflow
-
-### 1. Check Status
+### 2. Check Status & Stage
 ```bash
 git status
 git diff --stat
-```
-
-### 2. Run Pre-Commit Checks
-Run your project's lint and test commands before committing.
-
-### 3. Stage & Commit
-```bash
 git add [files]
-git commit -m "$(cat <<'EOF'
-type: subject - brief description
-
-- Key change 1
-- Key change 2
-EOF
-)"
 ```
+
+### 3. Commit
+Write a gitmoji + one-sentence commit message based on the conversation context.
+```bash
+git commit -m ":sparkles: Add merch store page with product grid and cart"
+```
+
+**Commit rules (CRITICAL)**:
+- One gitmoji + one sentence. No bullet lists, no multiline bodies.
+- No AI attribution. No co-author lines, no signatures, no references to Claude/AI.
+- Commit as the developer, never as Claude.
 
 ### 4. Push
 ```bash
 git push origin [current-branch]
 ```
 
-## Commit Types
+If the branch has no upstream yet, use `git push -u origin [branch]`.
 
-| Type | When to Use |
-|------|-------------|
-| `learn` | New concept or skill demonstrated |
-| `feat` | New feature or functionality |
-| `fix` | Bug fix |
-| `refactor` | Code improvement without behavior change |
-| `docs` | Documentation updates |
-| `checkpoint` | Major milestone completion |
-| `experiment` | Exploratory work (may fail) |
+## Gitmoji Reference
 
-## Message Guidelines
-
-- **Use conversation context**: You know what was just discussed/built
-- **Keep it concise**: 1-2 sentence summary, bullet points for details
-- **Match branch type**: `learn/*` branches get `learn:` commits
-- **No AI attribution**: Do not add co-author lines or reference Claude
-
-## PR Workflow Integration
-
-After committing, if the work represents a complete unit (feature done, bug fixed, lesson complete), create a PR:
-
-### When to Create a PR
-- Feature branch has a complete, working feature
-- Fix branch resolves the issue
-- Learning branch completes a milestone or lesson
-- **Do NOT create PRs for partial/in-progress work** -- just commit and push
-
-### Creating a PR
-```bash
-gh pr create --title "type: brief description" --body "$(cat <<'EOF'
-## Summary
-- What was done and why
-
-## Changes
-- Key change 1
-- Key change 2
-
-## Testing
-- How it was tested
-
-## Review Notes
-Please review carefully before merging. Check for:
-- [ ] Code correctness and edge cases
-- [ ] No hardcoded secrets or credentials
-- [ ] Tests pass
-- [ ] Linting passes
-EOF
-)"
-```
-
-### After Creating a PR
-- **Always** tell the user the PR URL
-- **Always** ask the user to review the code carefully before merging
-- **Never** merge PRs automatically -- the user must approve and merge
-- Suggest specific things to look at during review based on what changed
+| Type | Gitmoji | When |
+|------|---------|------|
+| New feature | `:sparkles:` | Adding new functionality |
+| Bug fix | `:bug:` | Fixing broken behavior |
+| Refactor | `:recycle:` | Restructuring without behavior change |
+| Style/UI | `:lipstick:` | Visual/styling changes |
+| Performance | `:zap:` | Performance improvements |
+| Tests | `:white_check_mark:` | Adding or updating tests |
+| Config/chore | `:wrench:` | Configuration changes |
+| Cleanup | `:fire:` | Removing code or files |
+| Docs | `:memo:` | Documentation updates |
+| Learning | `:seedling:` | New concept or skill demonstrated |
+| Checkpoint | `:triangular_flag_on_post:` | Major milestone completion |
+| Experiment | `:alembic:` | Exploratory work |
