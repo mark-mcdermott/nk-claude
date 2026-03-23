@@ -9,6 +9,8 @@
 | Commit | `/commit` | | Quick git commits with conversation context |
 | Commit & PR | `/commit-and-pr` | `/cpr` | Commit, push, and create a PR in one step |
 | Commit Push on Main | `/commit-push-on-main` | `/cpom` | Commit, merge to main if needed, and push |
+| TDD | `/tdd` | | Build a feature TDD-style with Playwright tests |
+| One-Shot | `/one-shot` | | Build entire project from checklist, TDD-style, autonomously |
 | Abort | `/abort` | | Abandon the current branch and return to main |
 | Merged | `/merged` | | Clean up after merging a PR |
 | Permissions | `/permissions` | | Toggle between loose and tight permission presets |
@@ -30,6 +32,16 @@
 **Alias**: `/cpom`
 **Usage**: `/cpom` or `/commit-push-on-main`
 **Does**: Commits current changes with gitmoji message. If on main, pushes directly. If on a feature branch, switches to main, merges the branch, and pushes.
+
+### /tdd
+**Usage**: `/tdd <feature description>`
+**Examples**: `/tdd add a login page that redirects to dashboard`, `/tdd the contact form submits and shows a success toast`
+**Does**: Writes a Playwright test for the feature, runs it to confirm failure, builds the feature, then iterates until the test passes.
+
+### /one-shot
+**Usage**: `/one-shot <checklist or path to checklist file>`
+**Examples**: `/one-shot build a todo app with auth, CRUD todos, and filtering`, `/one-shot CHECKLIST.md`
+**Does**: Parses a checklist into tasks, then builds each feature TDD-style with Playwright. Commits after each passing feature. Writes progress to `.claude/one-shot-progress.md` to survive context compression. Only returns when the full checklist is complete.
 
 ### /branch
 **Usage**: `/branch <branch-name>`
@@ -66,5 +78,7 @@
 - Work is done and needs a PR -> `/cpr`
 - Quick commit and push to main -> `/cpom`
 - Starting a new feature -> `/baf`
+- Building a feature with test-first approach -> `/tdd`
+- Building an entire project autonomously -> `/one-shot`
 - Abandoning a branch -> `/abort`
 - After a PR is merged -> `/merged`

@@ -34,6 +34,8 @@ Skills are defined in `.claude/skills/<skill-name>/SKILL.md`. Aliases are separa
 | Commit | `/commit` | | Quick git commits with conversation context |
 | Commit & PR | `/commit-and-pr` | `/cpr` | Commit, push, and create a PR in one step |
 | Commit Push on Main | `/commit-push-on-main` | `/cpom` | Commit, merge to main if needed, and push |
+| TDD | `/tdd` | | Build a feature TDD-style with Playwright tests |
+| One-Shot | `/one-shot` | | Build entire project from checklist, TDD-style, autonomously |
 | Abort | `/abort` | | Abandon the current branch and return to main |
 | Merged | `/merged` | | Clean up after merging a PR |
 | Permissions | `/permissions` | | Toggle between loose and tight permission presets |
