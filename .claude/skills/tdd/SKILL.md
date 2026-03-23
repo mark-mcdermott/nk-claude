@@ -112,7 +112,18 @@ Read `.claude/auto-pr.md`. If auto-PR is **on** and the current branch is not `m
 
 If auto-PR is **off** or on `main`, skip this step.
 
-### 9. Done
+### 9. Slop Check
+Quickly review your own work for common AI coding issues. Fix any you find before moving on:
+- Files created that aren't imported/used anywhere
+- Wrapper functions or abstractions that are only used once (inline them)
+- Utility files that duplicate what a library already provides
+- Over-engineered patterns (factories, configs, abstractions) for simple things
+- Gratuitous comments or docstrings on self-evident code
+
+### 10. Update README
+If a `README.md` exists at the project root, update it to reflect the new feature (add to feature list, update setup instructions, etc.). Skip if the feature doesn't warrant a README mention.
+
+### 11. Done
 - Report to the user that the feature is implemented and the test passes
 - Mention what was built, what test type was used, and what the test covers
 

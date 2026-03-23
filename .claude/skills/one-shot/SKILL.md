@@ -142,7 +142,15 @@ Commit after each passing feature. This protects work and keeps diffs small.
 - Follow the format and rules in `.claude/commit-style.md`.
 - No AI attribution. No co-author lines, no signatures, no references to Claude/AI.
 
-#### g. Update Progress
+#### g. Slop Check
+Quickly review your own work for this feature. Fix any issues before committing:
+- Files created that aren't imported/used anywhere
+- Wrapper functions or abstractions that are only used once (inline them)
+- Utility files that duplicate what a library already provides
+- Over-engineered patterns (factories, configs, abstractions) for simple things
+- Gratuitous comments or docstrings on self-evident code
+
+#### h. Update Progress
 
 Mark the task as `completed`.
 
@@ -156,9 +164,10 @@ Update `.claude/one-shot-progress.md`:
 After all features are complete:
 
 1. Run the full test suite one final time
-2. Update progress file with final status
-3. Delete `.claude/one-shot-progress.md` (it's served its purpose)
-4. **Auto-PR check**: Read `.claude/auto-pr.md`. If auto-PR is **on** and the current branch is not `main`:
+2. **Update README**: If a `README.md` exists at the project root, update it to reflect everything that was built (features, setup instructions, tech stack, etc.)
+3. Update progress file with final status
+4. Delete `.claude/one-shot-progress.md` (it's served its purpose)
+5. **Auto-PR check**: Read `.claude/auto-pr.md`. If auto-PR is **on** and the current branch is not `main`:
    - Push the branch
    - Create a PR covering all completed work, with no AI attribution
    - Report the PR URL to the user
