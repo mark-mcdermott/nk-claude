@@ -23,7 +23,7 @@ allowed-tools:
 
 # One-Shot Skill
 
-Autonomously build an entire project from a checklist. Each feature is built TDD-style with Playwright. Work is committed and documented as you go. Only return to the user when the full checklist is complete — or if truly blocked.
+Autonomously build an entire project from a checklist. Each feature is built TDD-style — unit tests for logic/utilities, e2e tests for user-facing flows. Work is committed and documented as you go. Only return to the user when the full checklist is complete — or if truly blocked.
 
 ## Workflow
 
@@ -65,15 +65,29 @@ Starting build.
 
 Save to `.claude/one-shot-progress.md`.
 
-### 4. Ensure Playwright is Ready
+### 4. Ensure Test Frameworks are Ready
+
+Check what's available and install what's needed:
+
+**For e2e tests (Playwright):**
 ```bash
 npx playwright --version
 ```
-If not installed:
+If not installed and e2e tests will be needed:
 ```bash
 npm install -D @playwright/test && npx playwright install
 ```
-Check for existing `playwright.config.ts`. If none exists, create a sensible default.
+
+**For unit tests (Vitest/Jest):**
+```bash
+npx vitest --version || npx jest --version
+```
+If neither is installed and unit tests will be needed, prefer Vitest:
+```bash
+npm install -D vitest
+```
+
+Follow whichever frameworks the project already uses. Only install new ones if none exist.
 
 ### 5. For Each Feature — TDD Cycle
 
@@ -81,30 +95,38 @@ Before starting each feature, **re-read `.claude/one-shot-progress.md`** to re-o
 
 Then update the task status to `in_progress` and follow this cycle:
 
-#### a. Write the Test (RED)
-- Write a Playwright test for the feature
+#### a. Choose Test Type
+Pick unit or e2e based on what the feature is:
+- User-facing flow (page, form, navigation) → **e2e** (Playwright)
+- Utility, helper, validation, business logic → **unit** (Vitest/Jest)
+- API route/middleware → judge by complexity
+
+#### b. Write the Test (RED)
+- Write a test for the feature using the appropriate framework
 - Follow existing test conventions in the project
 
-#### b. Confirm Failure
+#### c. Confirm Failure
 ```bash
+# e2e:
 npx playwright test <test-file> --reporter=list
+# unit:
+npx vitest run <test-file>
 ```
 - Must fail. If it passes, the test isn't testing anything new.
 
-#### c. Build the Feature (GREEN)
+#### d. Build the Feature (GREEN)
 - Implement the minimum to make the test pass
 - Follow existing project patterns
 
-#### d. Confirm Pass
-```bash
-npx playwright test <test-file> --reporter=list
-```
+#### e. Confirm Pass
+Run the same test command from step c.
 - If it fails, fix and rerun. Do not weaken the test.
 - If it passes, continue.
 
-#### e. Run Full Test Suite
+#### f. Run Full Test Suite
 ```bash
-npx playwright test --reporter=list
+# Run all available test suites
+npx playwright test --reporter=list 2>/dev/null; npx vitest run 2>/dev/null
 ```
 - Ensure nothing else broke. Fix regressions before moving on.
 

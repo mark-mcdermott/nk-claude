@@ -25,24 +25,7 @@
 
 ## Skills
 
-Skills are defined in `.claude/skills/<skill-name>/SKILL.md`. Aliases are separate skills that delegate to the main skill.
-
-| Skill | Command | Alias | When to Use |
-|-------|---------|-------|-------------|
-| Branch | `/branch` | | Create a new branch and switch to it |
-| Branch & Feature | `/branch-and-feature` | `/baf` | Create a branch and start building a feature |
-| Commit | `/commit` | | Quick git commits with conversation context |
-| Commit & PR | `/commit-and-pr` | `/cpr` | Commit, push, and create a PR in one step |
-| Commit Push on Main | `/commit-push-on-main` | `/cpom` | Commit, merge to main if needed, and push |
-| TDD | `/tdd` | | Build a feature TDD-style with Playwright tests |
-| One-Shot | `/one-shot` | | Build entire project from checklist, TDD-style, autonomously |
-| Commit Style | `/commit-style` | | Switch between gitmoji, gitmoji-multiline, and conventional commits |
-| Fix Commits | `/fix-commits` | | Rewrite repo commit history to match current commit style |
-| Auto-PR | `/auto-pr` | | Toggle automatic PR creation after features are completed |
-| Abort | `/abort` | | Abandon the current branch and return to main |
-| Merged | `/merged` | | Clean up after merging a PR |
-| Permissions | `/permissions` | | Toggle between loose and tight permission presets |
-| Stack | `/stack` | | Configure CLAUDE.md and hooks for a tech stack |
+See `skills/README.md` for the full list, descriptions, and usage examples.
 
 ## Hooks (Configured in settings.json)
 
