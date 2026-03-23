@@ -39,6 +39,12 @@ Use `TaskCreate` for each feature in the checklist. This is critical — tasks s
 
 ### 3. Initialize Progress File
 
+**If `.claude/one-shot-progress.md` already exists**, back it up before starting fresh:
+```bash
+mkdir -p .claude/one-shot-progress-bak
+mv .claude/one-shot-progress.md ".claude/one-shot-progress-bak/one-shot-progress-bak-$(date +%m-%d-%y-%H-%M-%S).md"
+```
+
 Write the initial progress file:
 
 ```markdown
