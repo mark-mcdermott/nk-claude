@@ -33,7 +33,8 @@ Allows most operations without prompting. Use when you trust the session and wan
       "WebFetch",
       "WebSearch",
       "Bash",
-      "Agent"
+      "Agent",
+      "Skill"
     ],
     "deny": [
       "Bash(rm -rf *)",
@@ -56,6 +57,7 @@ Only allows read-only tools and the project's skills. Everything else prompts.
       "Read",
       "Glob",
       "Grep",
+      "Skill",
       "Bash(git status *)",
       "Bash(git log *)",
       "Bash(git diff *)",
