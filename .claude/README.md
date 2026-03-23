@@ -38,6 +38,7 @@ Skills are defined in `.claude/skills/<skill-name>/SKILL.md`. Aliases are separa
 | One-Shot | `/one-shot` | | Build entire project from checklist, TDD-style, autonomously |
 | Commit Style | `/commit-style` | | Switch between gitmoji, gitmoji-multiline, and conventional commits |
 | Fix Commits | `/fix-commits` | | Rewrite repo commit history to match current commit style |
+| Auto-PR | `/auto-pr` | | Toggle automatic PR creation after features are completed |
 | Abort | `/abort` | | Abandon the current branch and return to main |
 | Merged | `/merged` | | Clean up after merging a PR |
 | Permissions | `/permissions` | | Toggle between loose and tight permission presets |

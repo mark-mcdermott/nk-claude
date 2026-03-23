@@ -136,7 +136,11 @@ After all features are complete:
 1. Run the full test suite one final time
 2. Update progress file with final status
 3. Delete `.claude/one-shot-progress.md` (it's served its purpose)
-4. Report to the user:
+4. **Auto-PR check**: Read `.claude/auto-pr.md`. If auto-PR is **on** and the current branch is not `main`:
+   - Push the branch
+   - Create a PR covering all completed work, with no AI attribution
+   - Report the PR URL to the user
+5. Report to the user:
    - What was built (brief summary)
    - All tests passing
    - Number of commits made

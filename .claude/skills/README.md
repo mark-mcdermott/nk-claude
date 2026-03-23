@@ -13,6 +13,7 @@
 | One-Shot | `/one-shot` | | Build entire project from checklist, TDD-style, autonomously |
 | Commit Style | `/commit-style` | | Switch between gitmoji, gitmoji-multiline, and conventional commits |
 | Fix Commits | `/fix-commits` | | Rewrite repo commit history to match current commit style |
+| Auto-PR | `/auto-pr` | | Toggle automatic PR creation after features are completed |
 | Abort | `/abort` | | Abandon the current branch and return to main |
 | Merged | `/merged` | | Clean up after merging a PR |
 | Permissions | `/permissions` | | Toggle between loose and tight permission presets |
@@ -43,6 +44,10 @@
 ### /fix-commits
 **Usage**: `/fix-commits`
 **Does**: Audits the entire git history against `.claude/commit-style.md`, shows a change plan, and rewrites non-conforming commit messages. Requires two explicit confirmations (before rewrite and before force push). Uses `--force-with-lease` for safety.
+
+### /auto-pr
+**Usage**: `/auto-pr [on|off]`
+**Does**: Toggles automatic PR creation. When on, `/tdd`, `/one-shot`, and `/branch-and-feature` will auto-commit and create a PR after completing work. Default is off. No argument defaults to on. Config stored in `.claude/auto-pr.md`.
 
 ### /tdd
 **Usage**: `/tdd <feature description>`

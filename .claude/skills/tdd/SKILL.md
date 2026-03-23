@@ -65,7 +65,16 @@ npx playwright test <test-file> --reporter=list
 - **If it passes**: Move to step 7.
 - **If it fails**: Read the error, fix the implementation, and run again. Repeat until passing. Do not modify the test to make it pass — fix the code.
 
-### 7. Done
+### 7. Auto-PR Check
+Read `.claude/auto-pr.md`. If auto-PR is **on** and the current branch is not `main`:
+- Commit the changes (following `.claude/commit-style.md`)
+- Push the branch
+- Create a PR with no AI attribution
+- Report the PR URL to the user
+
+If auto-PR is **off** or on `main`, skip this step.
+
+### 8. Done
 - Report to the user that the feature is implemented and the test passes
 - Mention what was built and what the test covers
 
