@@ -114,7 +114,7 @@ EOF
 - **Always test** before creating PRs
 - **Create backup branches** before destructive operations
 - **Document decisions** in commit messages
-- **All commits must use gitmoji.dev style** (`:sparkles:`, `:bug:`, `:recycle:`, etc.)
+- **All commits must follow the style in `.claude/commit-style.md`** — read it before writing any commit message
 
 ## Error Recovery
 

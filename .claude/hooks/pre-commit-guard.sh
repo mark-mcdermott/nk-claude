@@ -5,10 +5,16 @@
 #
 # Exit codes:
 #   0 = Allow (no issues)
-#   1 = Non-blocking error
 #   2 = BLOCKING (prevents tool execution)
 
 INPUT=$(cat)
+
+# Fast exit: skip jq parsing if this isn't a commit command
+case "$INPUT" in
+  *"git commit"*) ;;
+  *) exit 0 ;;
+esac
+
 COMMAND=$(echo "$INPUT" | jq -r '.tool_input.command // ""')
 
 # Only trigger for git commit commands
