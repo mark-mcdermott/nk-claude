@@ -12,6 +12,7 @@
 | TDD | `/tdd` | | Build a feature TDD-style with Playwright tests |
 | One-Shot | `/one-shot` | | Build entire project from checklist, TDD-style, autonomously |
 | Commit Style | `/commit-style` | | Switch between gitmoji, gitmoji-multiline, and conventional commits |
+| Fix Commits | `/fix-commits` | | Rewrite repo commit history to match current commit style |
 | Abort | `/abort` | | Abandon the current branch and return to main |
 | Merged | `/merged` | | Clean up after merging a PR |
 | Permissions | `/permissions` | | Toggle between loose and tight permission presets |
@@ -38,6 +39,10 @@
 **Usage**: `/commit-style <style>`
 **Styles**: `gitmoji` (one-liners, default), `gitmoji-multiline` (summary + bullet body), `conventional` (type(scope): description)
 **Does**: Rewrites `.claude/commit-style.md` which all commit skills read. One file change switches the style everywhere.
+
+### /fix-commits
+**Usage**: `/fix-commits`
+**Does**: Audits the entire git history against `.claude/commit-style.md`, shows a change plan, and rewrites non-conforming commit messages. Requires two explicit confirmations (before rewrite and before force push). Uses `--force-with-lease` for safety.
 
 ### /tdd
 **Usage**: `/tdd <feature description>`
