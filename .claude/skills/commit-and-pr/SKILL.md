@@ -4,7 +4,7 @@ description: Commit all changes, push, and create a PR in one step
 usage: /commit-and-pr
 examples:
   - /commit-and-pr
-  - /cap
+  - /cpr
 allowed-tools:
   - Bash(git:*)
   - Bash(gh:*)

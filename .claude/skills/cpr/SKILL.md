@@ -1,7 +1,7 @@
 ---
-name: cap
+name: cpr
 description: Alias for /commit-and-pr — Commit all changes, push, and create a PR in one step
-usage: /cap
+usage: /cpr
 allowed-tools:
   - Bash(git:*)
   - Bash(gh:*)

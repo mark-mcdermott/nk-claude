@@ -1,19 +1,18 @@
 ---
-name: commit
-description: Quick git commits with conversation context
-usage: /commit [type]
+name: commit-push-on-main
+description: Commit changes, merge to main if needed, and push
+usage: /commit-push-on-main
 examples:
-  - /commit
-  - /commit checkpoint
-  - /commit experiment
+  - /commit-push-on-main
+  - /cpom
 allowed-tools:
   - Bash(git:*)
   - Read
 ---
 
-# Commit Skill
+# Commit Push on Main
 
-Quick commits that leverage conversation context. Just stage, commit, and push — no PR creation. Use `/cpr` when the work is done and needs a PR.
+Commit current changes and get them onto main. If already on main, just commit and push. If on a feature branch, commit, switch to main, merge the branch, and push.
 
 ## Workflow
 
@@ -39,12 +38,26 @@ git commit -m ":sparkles: Add merch store page with product grid and cart"
 - No AI attribution. No co-author lines, no signatures, no references to Claude/AI.
 - Commit as the developer, never as Claude.
 
-### 4. Push
+### 4. Get to Main and Push
+
+Determine the current branch:
 ```bash
-git push origin [current-branch]
+git branch --show-current
 ```
 
-If the branch has no upstream yet, use `git push -u origin [branch]`.
+**If already on `main`:**
+```bash
+git push origin main
+```
+
+**If on a feature branch:**
+```bash
+git checkout main
+git merge [branch-name]
+git push origin main
+```
+
+After pushing, report success to the user.
 
 ## Gitmoji Reference
 
@@ -59,6 +72,3 @@ If the branch has no upstream yet, use `git push -u origin [branch]`.
 | Config/chore | `:wrench:` | Configuration changes |
 | Cleanup | `:fire:` | Removing code or files |
 | Docs | `:memo:` | Documentation updates |
-| Learning | `:seedling:` | New concept or skill demonstrated |
-| Checkpoint | `:triangular_flag_on_post:` | Major milestone completion |
-| Experiment | `:alembic:` | Exploratory work |

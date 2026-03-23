@@ -56,7 +56,7 @@ git checkout -b feat/<branch-name>
 
 ### 5. After Implementation
 - Run the project's typecheck and lint commands to verify (check package.json or project config for available scripts)
-- Do NOT auto-commit — let the user decide when to commit (they can use `/commit` or `/cap`)
+- Do NOT auto-commit — let the user decide when to commit (they can use `/commit` or `/cpr`)
 
 ## Branch Name Conventions
 

@@ -16,7 +16,7 @@ This applies to:
 - **Git commits** — messages should read as if written by the developer
 - **Pull requests** — titles and bodies must contain zero AI references
 - **GitHub comments** — no AI attribution in any comments or reviews
-- **Any skill or command** that creates commits or PRs (`/commit`, `/cap`, `/commit-and-pr`, etc.)
+- **Any skill or command** that creates commits or PRs (`/commit`, `/cpr`, `/commit-and-pr`, `/cpom`, `/commit-push-on-main`, etc.)
 
 ## Gitmoji Commit Style (CRITICAL — Applies to All Commits)
 
@@ -26,7 +26,7 @@ Format: `:gitmoji: Brief description`
 
 Example: `:sparkles: Add merch store page with product grid`
 
-This applies to all skills, agents, and manual commits — `/commit`, `/cap`, `/commit-and-pr`, git-manager agent, and any direct `git commit` commands.
+This applies to all skills, agents, and manual commits — `/commit`, `/cpr`, `/commit-and-pr`, `/cpom`, `/commit-push-on-main`, git-manager agent, and any direct `git commit` commands.
 
 ## Settings Hierarchy
 
