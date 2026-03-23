@@ -1,81 +1,63 @@
 # Skills Index
 
-> **Load this first** to see available skills and when to use them.
-
-## Skill Types
-
-| Type | Purpose | Examples |
-|------|---------|----------|
-| **Workflow** | Execute a multi-step procedure | `/lesson-start`, `/commit`, `/project-init` |
-| **Reference** | Load patterns/guidance for use in conversation | `/testing-patterns` |
-| **Audit** | Analyze and report on project state | `/docs-audit`, `/progress-review` |
-
 ## Available Skills
 
-| Skill | Command | Type | When to Use |
-|-------|---------|------|-------------|
-| Lesson Start | `/lesson-start` | Workflow | Beginning a learning or development session |
-| Progress Review | `/progress-review` | Audit | Spaced repetition review of learned concepts |
-| Commit | `/commit` | Workflow | Quick git commits with conversation context |
-| Testing Patterns | `/testing-patterns` | Reference | Testing standards reference |
-| Educational Workflow | `/educational-workflow` | Workflow | Structured workflow for sessions |
-| Docs Audit | `/docs-audit` | Audit | Audit documentation for broken references and orphans |
-| Project Init | `/project-init` | Workflow | Scaffold docs and CLAUDE.md for a new project |
-| Fresh Clone | `/fresh-clone` | Workflow | Recreate gitignored files after a fresh clone |
+| Skill | Command | Alias | When to Use |
+|-------|---------|-------|-------------|
+| Branch | `/branch` | | Create a new branch and switch to it |
+| Branch & Feature | `/branch-and-feature` | `/baf` | Create a branch and start building a feature |
+| Commit | `/commit` | | Quick git commits with conversation context |
+| Commit & PR | `/commit-and-pr` | `/cap` | Commit, push, and create a PR in one step |
+| Abort | `/abort` | | Abandon the current branch and return to main |
+| Merged | `/merged` | | Clean up after merging a PR |
+| Permissions | `/permissions` | | Toggle between loose and tight permission presets |
+| Stack | `/stack` | | Configure CLAUDE.md and hooks for a tech stack |
 
 ## Skill Descriptions
 
-### /project-init
-**Purpose**: Scaffold .claude/context/, .learning/, and CLAUDE.md for a new project
-**Usage**: `/project-init [project-name]`
-**Examples**: `/project-init`, `/project-init hoobie`
-**Does**: Interviews you about your background and project, then scaffolds `.claude/context/`, `.learning/`, `CLAUDE.md`, and developer profile with real content
-
-### /fresh-clone
-**Purpose**: Recreate gitignored files after a fresh clone
-**Usage**: `/fresh-clone`
-**Does**: Detects missing gitignored files (like `developer-profile.md`) and walks you through recreating them
-
-### /lesson-start
-**Purpose**: Full session initialization
-**Usage**: `/lesson-start [topic]`
-**Does**: Loads learning progress, identifies next lesson, sets up context
-
-### /progress-review
-**Purpose**: Spaced repetition session for reinforcing learned concepts
-**Usage**: `/progress-review [focus-area]`
-**Does**: Checks progress tracking for concepts due for review, generates questions
-
 ### /commit
-**Purpose**: Quick git commits that leverage conversation context
 **Usage**: `/commit [type]`
 **Examples**: `/commit`, `/commit checkpoint`, `/commit experiment`
-**Does**: Checks status, stages and commits with context-aware message
-**Note**: For complex git operations (conflicts, rebase), delegate to git-manager agent instead
+**Does**: Checks status, stages and commits with gitmoji message. For complex git operations (conflicts, rebase), delegate to git-manager agent instead.
 
-### /testing-patterns
-**Type**: Reference
-**Purpose**: Testing patterns and standards for projects
-**Usage**: `/testing-patterns [type]`
-**Does**: Loads testing standards, provides patterns for testing
+### /commit-and-pr
+**Alias**: `/cap`
+**Usage**: `/cap` or `/commit-and-pr`
+**Does**: Runs pre-commit checks, stages, commits with gitmoji message, pushes, and creates a PR. Returns the PR URL for review.
 
-### /educational-workflow
-**Purpose**: Structured workflow patterns for learning and development sessions
-**Usage**: `/educational-workflow [phase]`
-**Does**: Provides session structure, checkpoint patterns, progress tracking
+### /branch
+**Usage**: `/branch <branch-name>`
+**Examples**: `/branch feat/dark-mode`, `/branch fix/broken-publish`
+**Does**: Checks for clean state, creates the branch, switches to it. No commits, no implementation.
 
-### /docs-audit
-**Purpose**: Audit documentation for broken references, orphaned files, and duplicates
-**Usage**: `/docs-audit [scope]`
-**Examples**: `/docs-audit`, `/docs-audit agents`, `/docs-audit full`
-**Does**: Checks references exist, finds orphaned files, identifies duplicate content
+### /branch-and-feature
+**Alias**: `/baf`
+**Usage**: `/baf <branch-name> <feature description>`
+**Examples**: `/baf merch-store add a merch store page`, `/baf fix/broken-publish fix the publish flow`
+**Does**: Creates a branch (auto-prefixes `feat/` if no prefix given), then starts implementing the described feature.
+
+### /abort
+**Usage**: `/abort`
+**Does**: Stashes any uncommitted work, switches to main, and force-deletes the branch. Safe bail-out when you want to discard a branch entirely.
+
+### /merged
+**Usage**: `/merged`
+**Does**: Checks out main, pulls latest, deletes the merged branch locally and on the remote.
+
+### /permissions
+**Usage**: `/permissions <mode>`
+**Modes**: `loose` (permissive, most things auto-allowed) or `tight` (read-only auto-allowed, everything else prompts)
+**Does**: Rewrites the permissions block in `settings.local.json` to the selected preset. Preserves other settings. Destructive commands (`rm -rf`, `sudo`, force push) are always denied in loose mode.
+
+### /stack
+**Usage**: `/stack <mode>`
+**Modes**: `zendcats` (Zod, Edge/Neon/Vercel, Next.js, Drizzle, Capacitor, Auth, Tauri, shadcn-ui) or `open` (any stack)
+**Does**: Writes `CLAUDE.md` with stack-specific conventions, updates `pre-commit-guard.sh` with real eslint/prettier checks (zendcats) or generic reminders (open), and narrows `test-reminder.sh` extensions to match.
 
 ## Proactive Skill Usage
 
-Claude can invoke these skills proactively when:
-- Starting a session -> `/lesson-start`
 - Before committing -> `/commit`
-- When reviewing older concepts -> `/progress-review`
-- After major doc changes -> `/docs-audit`
-- Starting a new project -> `/project-init`
-- After a fresh clone -> `/fresh-clone`
+- Work is done and needs a PR -> `/cap`
+- Starting a new feature -> `/baf`
+- Abandoning a branch -> `/abort`
+- After a PR is merged -> `/merged`

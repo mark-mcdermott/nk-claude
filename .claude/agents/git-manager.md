@@ -45,7 +45,7 @@ Specialized agent for **complex git operations** that require focused attention,
 gh repo create [owner]/[repo-name] --public --clone
 git init
 git add .
-git commit -m "initial: project setup"
+git commit -m ":tada: Initial project setup"
 git push -u origin main
 ```
 
@@ -114,6 +114,7 @@ EOF
 - **Always test** before creating PRs
 - **Create backup branches** before destructive operations
 - **Document decisions** in commit messages
+- **All commits must use gitmoji.dev style** (`:sparkles:`, `:bug:`, `:recycle:`, etc.)
 
 ## Error Recovery
 

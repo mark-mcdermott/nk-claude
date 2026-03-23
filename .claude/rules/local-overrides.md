@@ -18,6 +18,16 @@ This applies to:
 - **GitHub comments** — no AI attribution in any comments or reviews
 - **Any skill or command** that creates commits or PRs (`/commit`, `/cap`, `/commit-and-pr`, etc.)
 
+## Gitmoji Commit Style (CRITICAL — Applies to All Commits)
+
+**All commits must use gitmoji.dev style.** Every commit message must start with a gitmoji code.
+
+Format: `:gitmoji: Brief description`
+
+Example: `:sparkles: Add merch store page with product grid`
+
+This applies to all skills, agents, and manual commits — `/commit`, `/cap`, `/commit-and-pr`, git-manager agent, and any direct `git commit` commands.
+
 ## Settings Hierarchy
 
 ```
