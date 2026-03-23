@@ -18,13 +18,11 @@ This applies to:
 - **GitHub comments** — no AI attribution in any comments or reviews
 - **Any skill or command** that creates commits or PRs (`/commit`, `/cpr`, `/commit-and-pr`, `/cpom`, `/commit-push-on-main`, etc.)
 
-## Gitmoji Commit Style (CRITICAL — Applies to All Commits)
+## Commit Style (CRITICAL — Applies to All Commits)
 
-**All commits must use gitmoji.dev style.** Every commit message must start with a gitmoji code.
+**All commits must follow the style defined in `.claude/commit-style.md`.** Read that file before writing any commit message.
 
-Format: `:gitmoji: Brief description`
-
-Example: `:sparkles: Add merch store page with product grid`
+Use `/commit-style` to switch between `gitmoji` (default), `gitmoji-multiline`, and `conventional`.
 
 This applies to all skills, agents, and manual commits — `/commit`, `/cpr`, `/commit-and-pr`, `/cpom`, `/commit-push-on-main`, git-manager agent, and any direct `git commit` commands.
 

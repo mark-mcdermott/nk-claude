@@ -11,6 +11,7 @@
 | Commit Push on Main | `/commit-push-on-main` | `/cpom` | Commit, merge to main if needed, and push |
 | TDD | `/tdd` | | Build a feature TDD-style with Playwright tests |
 | One-Shot | `/one-shot` | | Build entire project from checklist, TDD-style, autonomously |
+| Commit Style | `/commit-style` | | Switch between gitmoji, gitmoji-multiline, and conventional commits |
 | Abort | `/abort` | | Abandon the current branch and return to main |
 | Merged | `/merged` | | Clean up after merging a PR |
 | Permissions | `/permissions` | | Toggle between loose and tight permission presets |
@@ -31,7 +32,12 @@
 ### /commit-push-on-main
 **Alias**: `/cpom`
 **Usage**: `/cpom` or `/commit-push-on-main`
-**Does**: Commits current changes with gitmoji message. If on main, pushes directly. If on a feature branch, switches to main, merges the branch, and pushes.
+**Does**: Commits current changes. If on main, pushes directly. If on a feature branch, switches to main, merges the branch, and pushes.
+
+### /commit-style
+**Usage**: `/commit-style <style>`
+**Styles**: `gitmoji` (one-liners, default), `gitmoji-multiline` (summary + bullet body), `conventional` (type(scope): description)
+**Does**: Rewrites `.claude/commit-style.md` which all commit skills read. One file change switches the style everywhere.
 
 ### /tdd
 **Usage**: `/tdd <feature description>`

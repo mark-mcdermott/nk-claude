@@ -109,14 +109,15 @@ npx playwright test --reporter=list
 - Ensure nothing else broke. Fix regressions before moving on.
 
 #### f. Commit
+Read `.claude/commit-style.md` for the current commit style. Commit using that style.
 ```bash
 git add [relevant files]
-git commit -m ":sparkles: Add [feature name]"
+git commit -m "<message following .claude/commit-style.md>"
 ```
 Commit after each passing feature. This protects work and keeps diffs small.
 
 **Commit rules (CRITICAL)**:
-- One gitmoji + one sentence. No bullet lists, no multiline bodies.
+- Follow the format and rules in `.claude/commit-style.md`.
 - No AI attribution. No co-author lines, no signatures, no references to Claude/AI.
 
 #### g. Update Progress
@@ -151,13 +152,6 @@ After all features are complete:
 - **Keep the progress file concise.** It needs to fit in context — no verbose logs. Key decisions and current state only.
 - **If the dev server needs to be running**, start it in the background or configure `webServer` in `playwright.config.ts`.
 
-## Gitmoji Reference
+## Commit Style
 
-| Type | Gitmoji | When |
-|------|---------|------|
-| New feature | `:sparkles:` | Adding new functionality |
-| Bug fix | `:bug:` | Fixing broken behavior |
-| Refactor | `:recycle:` | Restructuring without behavior change |
-| Config/chore | `:wrench:` | Configuration or setup changes |
-| Tests | `:white_check_mark:` | Test-only changes |
-| Initial commit | `:tada:` | Project scaffolding |
+See `.claude/commit-style.md` for the active style, format, examples, and reference table.

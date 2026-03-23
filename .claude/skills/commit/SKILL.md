@@ -29,13 +29,10 @@ git add [files]
 ```
 
 ### 3. Commit
-Write a gitmoji + one-sentence commit message based on the conversation context.
-```bash
-git commit -m ":sparkles: Add merch store page with product grid and cart"
-```
+Read `.claude/commit-style.md` for the current commit style (gitmoji, gitmoji-multiline, or conventional). Write the commit message following that style exactly.
 
 **Commit rules (CRITICAL)**:
-- One gitmoji + one sentence. No bullet lists, no multiline bodies.
+- Follow the format and rules in `.claude/commit-style.md`.
 - No AI attribution. No co-author lines, no signatures, no references to Claude/AI.
 - Commit as the developer, never as Claude.
 
@@ -46,19 +43,6 @@ git push origin [current-branch]
 
 If the branch has no upstream yet, use `git push -u origin [branch]`.
 
-## Gitmoji Reference
+## Commit Style
 
-| Type | Gitmoji | When |
-|------|---------|------|
-| New feature | `:sparkles:` | Adding new functionality |
-| Bug fix | `:bug:` | Fixing broken behavior |
-| Refactor | `:recycle:` | Restructuring without behavior change |
-| Style/UI | `:lipstick:` | Visual/styling changes |
-| Performance | `:zap:` | Performance improvements |
-| Tests | `:white_check_mark:` | Adding or updating tests |
-| Config/chore | `:wrench:` | Configuration changes |
-| Cleanup | `:fire:` | Removing code or files |
-| Docs | `:memo:` | Documentation updates |
-| Learning | `:seedling:` | New concept or skill demonstrated |
-| Checkpoint | `:triangular_flag_on_post:` | Major milestone completion |
-| Experiment | `:alembic:` | Exploratory work |
+See `.claude/commit-style.md` for the active style, format, examples, and reference table. Use `/commit-style` to switch between gitmoji, gitmoji-multiline, and conventional.
