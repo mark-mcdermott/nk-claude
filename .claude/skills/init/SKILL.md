@@ -62,6 +62,8 @@ Print this exactly:
 ```
 Common skills:
   /baf <branch> <description> — branch and build a feature
+  /batdd <branch> <feature> — branch and build a feature TDD-style
+  /baos <branch> <checklist> — branch and one-shot a project
   /commit — quick commit and push
   /cpr — commit, push, and create a PR
   /tdd <feature> — build a feature test-first

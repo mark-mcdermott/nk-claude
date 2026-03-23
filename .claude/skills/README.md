@@ -10,8 +10,10 @@
 | Commit | `/commit` | | Quick git commits with conversation context |
 | Commit & PR | `/commit-and-pr` | `/cpr` | Commit, push, and create a PR in one step |
 | Commit Push on Main | `/commit-push-on-main` | `/cpom` | Commit, merge to main if needed, and push |
-| TDD | `/tdd` | | Build a feature TDD-style with Playwright tests |
+| TDD | `/tdd` | | Build a feature TDD-style with tests |
+| Branch & TDD | `/batdd` | | Create a branch and build a feature TDD-style |
 | One-Shot | `/one-shot` | | Build entire project from checklist, TDD-style, autonomously |
+| Branch & One-Shot | `/baos` | | Create a branch and one-shot a project from a checklist |
 | Commit Style | `/commit-style` | | Switch between gitmoji, gitmoji-multiline, and conventional commits |
 | Fix Commits | `/fix-commits` | | Rewrite repo commit history to match current commit style |
 | Auto-PR | `/auto-pr` | | Toggle automatic PR creation after features are completed |
@@ -57,12 +59,22 @@
 ### /tdd
 **Usage**: `/tdd <feature description>`
 **Examples**: `/tdd add a login page that redirects to dashboard`, `/tdd the contact form submits and shows a success toast`
-**Does**: Writes a Playwright test for the feature, runs it to confirm failure, builds the feature, then iterates until the test passes.
+**Does**: Writes a test for the feature (unit or e2e based on what fits), runs it to confirm failure, builds the feature, then iterates until the test passes.
+
+### /batdd
+**Usage**: `/batdd <branch-name> <feature description>`
+**Examples**: `/batdd login add a login page that redirects to dashboard`
+**Does**: Creates a branch, then runs `/tdd` with the feature description.
 
 ### /one-shot
 **Usage**: `/one-shot <checklist or path to checklist file>`
 **Examples**: `/one-shot build a todo app with auth, CRUD todos, and filtering`, `/one-shot CHECKLIST.md`
-**Does**: Parses a checklist into tasks, then builds each feature TDD-style with Playwright. Commits after each passing feature. Writes progress to `.claude/one-shot-progress.md` to survive context compression. Only returns when the full checklist is complete.
+**Does**: Parses a checklist into tasks, then builds each feature TDD-style. Commits after each passing feature. Writes progress to `.claude/one-shot-progress.md` to survive context compression. Only returns when the full checklist is complete.
+
+### /baos
+**Usage**: `/baos <branch-name> <checklist or path to checklist file>`
+**Examples**: `/baos todo-app build a todo app with auth, CRUD todos, and filtering`
+**Does**: Creates a branch, then runs `/one-shot` with the checklist.
 
 ### /branch
 **Usage**: `/branch <branch-name>`
