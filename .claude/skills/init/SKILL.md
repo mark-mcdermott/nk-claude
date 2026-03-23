@@ -70,6 +70,10 @@ Common skills:
   /one-shot <checklist> — build entire project autonomously
   /merged — clean up after PR merge
 
+Worktree variants (isolated parallel work):
+  /waf, /watdd, /waos — like /baf, /tdd, /one-shot but in a worktree
+  /w <branch> — create worktree, /kw <branch> — tear it down
+
 Also available:
   /abort — abandon branch, /cpom — commit and push to main
   /commit-style — switch commit format, /fix-commits — rewrite history

@@ -17,6 +17,11 @@
 | Commit Style | `/commit-style` | | Switch between gitmoji, gitmoji-multiline, and conventional commits |
 | Fix Commits | `/fix-commits` | | Rewrite repo commit history to match current commit style |
 | Auto-PR | `/auto-pr` | | Toggle automatic PR creation after features are completed |
+| Worktree | `/w` | | Create a git worktree for a new branch |
+| Kill Worktree | `/kw` | | Remove a git worktree and optionally delete the branch |
+| Worktree & Feature | `/waf` | | Create a worktree and build a feature in it |
+| Worktree & TDD | `/watdd` | | Create a worktree and build a feature TDD-style in it |
+| Worktree & One-Shot | `/waos` | | Create a worktree and one-shot a project in it |
 | Abort | `/abort` | | Abandon the current branch and return to main |
 | Merged | `/merged` | | Clean up after merging a PR |
 | Permissions | `/permissions` | | Toggle between loose and tight permission presets |
@@ -75,6 +80,26 @@
 **Usage**: `/baos <branch-name> <checklist or path to checklist file>`
 **Examples**: `/baos todo-app build a todo app with auth, CRUD todos, and filtering`
 **Does**: Creates a branch, then runs `/one-shot` with the checklist.
+
+### /w
+**Usage**: `/w <branch-name>`
+**Does**: Creates a git worktree as a sibling directory and prints the path. Use to set up isolated workspaces for parallel Claude instances.
+
+### /kw
+**Usage**: `/kw <branch-name>`
+**Does**: Removes a git worktree. Asks whether to also delete the branch.
+
+### /waf
+**Usage**: `/waf <branch-name> <feature description>`
+**Does**: Creates a worktree, then builds a feature in it. Like `/baf` but in an isolated worktree. All file operations target the worktree path.
+
+### /watdd
+**Usage**: `/watdd <branch-name> <feature description>`
+**Does**: Creates a worktree, then builds a feature TDD-style in it. Like `/tdd` but in an isolated worktree.
+
+### /waos
+**Usage**: `/waos <branch-name> <checklist or file>`
+**Does**: Creates a worktree, then one-shots a project in it. Like `/one-shot` but in an isolated worktree. Progress file includes the worktree path to survive context compression.
 
 ### /branch
 **Usage**: `/branch <branch-name>`
