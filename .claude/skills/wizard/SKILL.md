@@ -1,7 +1,7 @@
 ---
-name: init
+name: wizard
 description: Project setup wizard — configure stack, commit style, permissions, and auto-PR with interactive prompts
-usage: /init
+usage: /wizard
 allowed-tools:
   - AskUserQuestion
   - Skill
@@ -9,7 +9,7 @@ allowed-tools:
   - Write
 ---
 
-# Init Skill
+# Wizard Skill
 
 Interactive setup wizard for new projects. Walks through each configuration option with defaults, then prints a quick reference of available skills.
 

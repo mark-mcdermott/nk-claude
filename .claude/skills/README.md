@@ -4,7 +4,7 @@
 
 | Skill | Command | Alias | When to Use |
 |-------|---------|-------|-------------|
-| Init | `/init` | | Project setup wizard — configure stack, commits, permissions, auto-PR |
+| Wizard | `/wizard` | | Project setup wizard — configure stack, commits, permissions, auto-PR |
 | Branch | `/branch` | | Create a new branch and switch to it |
 | Branch & Feature | `/branch-and-feature` | `/baf` | Create a branch and start building a feature |
 | Commit | `/commit` | | Quick git commits with conversation context |
@@ -29,8 +29,8 @@
 
 ## Skill Descriptions
 
-### /init
-**Usage**: `/init`
+### /wizard
+**Usage**: `/wizard`
 **Does**: Interactive setup wizard. Asks 4 questions (stack, commit style, permissions, auto-PR) with sensible defaults, applies all config, then prints a quick reference of available skills. Run this first on a new project.
 
 ### /commit
@@ -132,7 +132,7 @@
 
 ## Proactive Skill Usage
 
-- Starting a new project -> `/init`
+- Starting a new project -> `/wizard`
 - Before committing -> `/commit`
 - Work is done and needs a PR -> `/cpr`
 - Quick commit and push to main -> `/cpom`
