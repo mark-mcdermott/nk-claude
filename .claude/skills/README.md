@@ -59,7 +59,7 @@
 
 ### /auto-pr
 **Usage**: `/auto-pr [on|off]`
-**Does**: Toggles automatic PR creation. When on, `/tdd`, `/one-shot`, and `/branch-and-feature` will auto-commit and create a PR after completing work. Default is off. No argument defaults to on. Config stored in `.claude/auto-pr.md`.
+**Does**: Toggles automatic PR creation. When on, `/tdd`, `/one-shot`, and `/branch-and-feature` will auto-commit and create a PR after completing work. Default is on. No argument defaults to on. Config stored in `.claude/auto-pr.md`.
 
 ### /tdd
 **Usage**: `/tdd <feature description>`

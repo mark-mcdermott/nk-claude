@@ -20,7 +20,7 @@ Toggle whether skills automatically create PRs after completing features.
 - `/auto-pr` with no argument → sets to **on**
 - `/auto-pr on` → sets to **on**
 - `/auto-pr off` → sets to **off**
-- Default (before this skill is ever run) is **off**
+- Default (before this skill is ever run) is **on**
 
 ## Action
 
