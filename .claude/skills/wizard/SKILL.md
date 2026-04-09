@@ -23,7 +23,7 @@ Print a brief one-line welcome: "Setting up project config. Press enter or pick 
 Use AskUserQuestion to ask **all 4 questions at once** (the tool supports up to 4 questions per call):
 
 **Question 1 — Stack**
-- Options: `open` (Recommended), `zendcats`
+- Options: `zendcats` (Recommended), `open`
 - Header: "Stack"
 
 **Question 2 — Commit style**
@@ -35,7 +35,7 @@ Use AskUserQuestion to ask **all 4 questions at once** (the tool supports up to 
 - Header: "Permissions"
 
 **Question 4 — Auto-PR**
-- Options: `off` (Recommended), `on`
+- Options: `on` (Recommended), `off`
 - Header: "Auto-PR"
 
 ### 3. Apply Selections
