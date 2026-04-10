@@ -1,9 +1,8 @@
 ---
-name: commit-push-on-main
+name: _commit-push-on-main
 description: Commit changes, merge to main if needed, and push
-usage: /commit-push-on-main
+usage: /_commit-push-on-main
 examples:
-  - /commit-push-on-main
   - /cpom
 allowed-tools:
   - Bash(git:*)

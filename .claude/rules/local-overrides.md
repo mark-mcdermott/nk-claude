@@ -16,7 +16,7 @@ This applies to:
 - **Git commits** — messages should read as if written by the developer
 - **Pull requests** — titles and bodies must contain zero AI references
 - **GitHub comments** — no AI attribution in any comments or reviews
-- **Any skill or command** that creates commits or PRs (`/commit`, `/cpr`, `/commit-and-pr`, `/cpom`, `/commit-push-on-main`, etc.)
+- **Any skill or command** that creates commits or PRs (`/commit`, `/cpr`, `/cpom`, etc.)
 
 ## Commit Style (CRITICAL — Applies to All Commits)
 
@@ -24,7 +24,7 @@ This applies to:
 
 Use `/commit-style` to switch between `gitmoji` (default), `gitmoji-multiline`, and `conventional`.
 
-This applies to all skills, agents, and manual commits — `/commit`, `/cpr`, `/commit-and-pr`, `/cpom`, `/commit-push-on-main`, git-manager agent, and any direct `git commit` commands.
+This applies to all skills, agents, and manual commits — `/commit`, `/cpr`, `/cpom`, git-manager agent, and any direct `git commit` commands.
 
 ## Settings Hierarchy
 
