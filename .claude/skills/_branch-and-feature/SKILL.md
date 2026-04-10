@@ -1,10 +1,9 @@
 ---
-name: branch-and-feature
+name: _branch-and-feature
 description: Create a new branch and start building a feature on it
-usage: /branch-and-feature <branch-name> <feature description>
+usage: /_branch-and-feature <branch-name> <feature description>
 examples:
   - /baf merch-store add a merch store page with product grid
-  - /branch-and-feature dark-mode add dark mode toggle to the settings panel
   - /baf fix/broken-publish fix the blog publish flow hanging on large posts
 allowed-tools:
   - Bash(git:*)

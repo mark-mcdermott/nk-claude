@@ -1,9 +1,8 @@
 ---
-name: commit-and-pr
+name: _commit-and-pr
 description: Commit all changes, push, and create a PR in one step
-usage: /commit-and-pr
+usage: /_commit-and-pr
 examples:
-  - /commit-and-pr
   - /cpr
 allowed-tools:
   - Bash(git:*)

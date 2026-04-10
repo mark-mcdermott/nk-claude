@@ -6,7 +6,7 @@ When **on**, skills that complete features will automatically commit, push, and 
 
 - `/tdd` — after the feature passes, commit and create a PR
 - `/one-shot` — create a PR at reasonable milestones (not after every single feature, but at logical grouping points or when the full checklist is done)
-- `/branch-and-feature` — after the feature is built and verified, commit and create a PR
+- `/baf` — after the feature is built and verified, commit and create a PR
 
 ## PR rules
 

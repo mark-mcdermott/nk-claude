@@ -51,7 +51,7 @@ Save `WORKTREE_PATH` — this is the root for ALL subsequent operations.
 
 ### 2. Build the Feature
 
-Follow the same workflow as `/branch-and-feature` (steps 4-5: implement the feature, run checks, slop check, update README, auto-PR check), but:
+Follow the same workflow as `/_branch-and-feature` (steps 4-5: implement the feature, run checks, slop check, update README, auto-PR check), but:
 
 - **Every Bash call** starts with `cd <WORKTREE_PATH> &&`
 - **Every file path** is absolute under `<WORKTREE_PATH>/`

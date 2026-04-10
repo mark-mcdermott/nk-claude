@@ -1,6 +1,6 @@
 ---
 name: baf
-description: Alias for /branch-and-feature — Create a new branch and start building a feature on it
+description: Alias for /_branch-and-feature — Create a new branch and start building a feature on it
 usage: /baf <branch-name> <feature description>
 allowed-tools:
   - Bash(git:*)
@@ -13,6 +13,6 @@ allowed-tools:
   - Agent
 ---
 
-<!-- This is an alias for /branch-and-feature. Execute the branch-and-feature skill. -->
+<!-- This is an alias for /_branch-and-feature. Execute the _branch-and-feature skill. -->
 
-Use the Skill tool to invoke `branch-and-feature` with the same arguments. This skill is just a shortcut alias.
+Use the Skill tool to invoke `_branch-and-feature` with the same arguments. This skill is just a shortcut alias.

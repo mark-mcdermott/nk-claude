@@ -2,30 +2,42 @@
 
 ## Available Skills
 
-| Skill | Command | Alias | When to Use |
-|-------|---------|-------|-------------|
-| Wizard | `/wizard` | | Project setup wizard — configure stack, commits, permissions, auto-PR |
-| Branch | `/branch` | | Create a new branch and switch to it |
-| Branch & Feature | `/branch-and-feature` | `/baf` | Create a branch and start building a feature |
-| Commit | `/commit` | | Quick git commits with conversation context |
-| Commit & PR | `/commit-and-pr` | `/cpr` | Commit, push, and create a PR in one step |
-| Commit Push on Main | `/commit-push-on-main` | `/cpom` | Commit, merge to main if needed, and push |
-| TDD | `/tdd` | | Build a feature TDD-style with tests |
-| Branch & TDD | `/batdd` | | Create a branch and build a feature TDD-style |
-| One-Shot | `/one-shot` | | Build entire project from checklist, TDD-style, autonomously |
-| Branch & One-Shot | `/baos` | | Create a branch and one-shot a project from a checklist |
-| Commit Style | `/commit-style` | | Switch between gitmoji, gitmoji-multiline, and conventional commits |
-| Fix Commits | `/fix-commits` | | Rewrite repo commit history to match current commit style |
-| Auto-PR | `/auto-pr` | | Toggle automatic PR creation after features are completed |
-| Worktree | `/w` | | Create a git worktree for a new branch |
-| Kill Worktree | `/kw` | | Remove a git worktree and optionally delete the branch |
-| Worktree & Feature | `/waf` | | Create a worktree and build a feature in it |
-| Worktree & TDD | `/watdd` | | Create a worktree and build a feature TDD-style in it |
-| Worktree & One-Shot | `/waos` | | Create a worktree and one-shot a project in it |
-| Abort | `/abort` | | Abandon the current branch and return to main |
-| Merged | `/merged` | | Clean up after merging a PR |
-| Permissions | `/permissions` | | Toggle between loose and tight permission presets |
-| Stack | `/stack` | | Configure CLAUDE.md and hooks for a tech stack |
+| Skill | Command | When to Use |
+|-------|---------|-------------|
+| Wizard | `/wizard` | Project setup wizard — configure stack, commits, permissions, auto-PR |
+| Branch | `/branch` | Create a new branch and switch to it |
+| Branch & Feature | `/baf` | Create a branch and start building a feature |
+| Commit | `/commit` | Quick git commits with conversation context |
+| Commit & PR | `/cpr` | Commit, push, and create a PR in one step |
+| Commit Push on Main | `/cpom` | Commit, merge to main if needed, and push |
+| TDD | `/tdd` | Build a feature TDD-style with tests |
+| Branch & TDD | `/batdd` | Create a branch and build a feature TDD-style |
+| One-Shot | `/one-shot` | Build entire project from checklist, TDD-style, autonomously |
+| Branch & One-Shot | `/baos` | Create a branch and one-shot a project from a checklist |
+| Commit Style | `/commit-style` | Switch between gitmoji, gitmoji-multiline, and conventional commits |
+| Fix Commits | `/fix-commits` | Rewrite repo commit history to match current commit style |
+| Auto-PR | `/auto-pr` | Toggle automatic PR creation after features are completed |
+| Worktree | `/w` | Create a git worktree for a new branch |
+| Kill Worktree | `/kw` | Remove a git worktree and optionally delete the branch |
+| Worktree & Feature | `/waf` | Create a worktree and build a feature in it |
+| Worktree & TDD | `/watdd` | Create a worktree and build a feature TDD-style in it |
+| Worktree & One-Shot | `/waos` | Create a worktree and one-shot a project in it |
+| Abort | `/abort` | Abandon the current branch and return to main |
+| Merged | `/merged` | Clean up after merging a PR |
+| Permissions | `/permissions` | Toggle between loose and tight permission presets |
+| Stack | `/stack` | Configure CLAUDE.md and hooks for a tech stack |
+
+## Internal Skills (prefixed with `_`)
+
+These are invoked by the user-facing skills above, not called directly:
+
+| Skill | Invoked By |
+|-------|------------|
+| `_branch-and-feature` | `/baf`, `/waf` |
+| `_commit-and-pr` | `/cpr`, `_merge-branch-feature`, `_merge-branch-feature-one-shot` |
+| `_commit-push-on-main` | `/cpom` |
+| `_merge-branch-feature` | (chained internally — merge current branch, then `/baf`) |
+| `_merge-branch-feature-one-shot` | (chained internally — merge current branch, then `/baos`) |
 
 ## Skill Descriptions
 
@@ -38,14 +50,12 @@
 **Examples**: `/commit`, `/commit checkpoint`, `/commit experiment`
 **Does**: Checks status, stages and commits with gitmoji message. For complex git operations (conflicts, rebase), delegate to git-manager agent instead.
 
-### /commit-and-pr
-**Alias**: `/cpr`
-**Usage**: `/cpr` or `/commit-and-pr`
+### /cpr
+**Usage**: `/cpr`
 **Does**: Runs pre-commit checks, stages, commits with gitmoji message, pushes, and creates a PR. Returns the PR URL for review.
 
-### /commit-push-on-main
-**Alias**: `/cpom`
-**Usage**: `/cpom` or `/commit-push-on-main`
+### /cpom
+**Usage**: `/cpom`
 **Does**: Commits current changes. If on main, pushes directly. If on a feature branch, switches to main, merges the branch, and pushes.
 
 ### /commit-style
@@ -59,7 +69,7 @@
 
 ### /auto-pr
 **Usage**: `/auto-pr [on|off]`
-**Does**: Toggles automatic PR creation. When on, `/tdd`, `/one-shot`, and `/branch-and-feature` will auto-commit and create a PR after completing work. Default is on. No argument defaults to on. Config stored in `.claude/auto-pr.md`.
+**Does**: Toggles automatic PR creation. When on, `/tdd`, `/one-shot`, and `/baf` will auto-commit and create a PR after completing work. Default is on. No argument defaults to on. Config stored in `.claude/auto-pr.md`.
 
 ### /tdd
 **Usage**: `/tdd <feature description>`
@@ -106,8 +116,7 @@
 **Examples**: `/branch feat/dark-mode`, `/branch fix/broken-publish`
 **Does**: Checks for clean state, creates the branch, switches to it. No commits, no implementation.
 
-### /branch-and-feature
-**Alias**: `/baf`
+### /baf
 **Usage**: `/baf <branch-name> <feature description>`
 **Examples**: `/baf merch-store add a merch store page`, `/baf fix/broken-publish fix the publish flow`
 **Does**: Creates a branch (auto-prefixes `feat/` if no prefix given), then starts implementing the described feature.
