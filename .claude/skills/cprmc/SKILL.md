@@ -1,17 +1,16 @@
 ---
-name: cpr
-description: commit and PR — Commit all changes, push, and create a PR in one step
-usage: /cpr
+name: cprmc
+description: Commit, PR, merge, and cleanup — full branch wrap-up in one shot
+usage: /cprmc
 allowed-tools:
   - Bash(git:*)
   - Bash(gh:*)
   - Read
 ---
 
+# Commit, PR, Merge & Cleanup
 
-# Commit and PR Skill
-
-Commit, push, and create a pull request in one workflow. For when work on a branch is done.
+Wrap up a feature branch in one shot: commit all changes, create a PR, merge it, then clean up.
 
 ## Workflow
 
@@ -21,16 +20,19 @@ Fix any issues before proceeding.
 
 ### 2. Check Status & Stage
 ```bash
+git branch --show-current
 git status
 git diff --stat
 git add [files]
 ```
+- If on `main`, stop — this skill is for feature branches only.
+- Save the branch name for cleanup later.
 
 ### 3. Commit
-Read `.claude/commit-style.md` for the current commit style. Write the commit message following that style exactly.
+Read `.claude/commit-style.md` for the current commit style. If it doesn't exist, check `.claude/saved-presets/commit-style-conventional.md`. Write the commit message following that style exactly.
 
 **Commit rules (CRITICAL)**:
-- Follow the format and rules in `.claude/commit-style.md`.
+- Follow the format and rules in the commit style file.
 - No AI attribution. No co-author lines, no signatures, no references to Claude/AI.
 - Commit as the developer, never as Claude.
 
@@ -54,12 +56,6 @@ gh pr create --title "Brief description" --body "$(cat <<'EOF'
 
 ## Testing
 - How it was tested (typecheck, lint, e2e, manual)
-
-## Review Notes
-- [ ] Code correctness and edge cases
-- [ ] No hardcoded secrets or credentials
-- [ ] Tests pass
-- [ ] Linting passes
 EOF
 )"
 ```
@@ -68,12 +64,20 @@ EOF
 - Title under 70 characters, no AI attribution
 - No commit type prefix in PR title — just a clear description
 
-### 6. After Creating
-- **Always** return the PR URL to the user
-- **Always** ask the user to review before merging
-- **Never** merge PRs automatically
-- **No AI attribution** in commits or PR
+### 6. Merge the PR
+```bash
+gh pr merge --squash --delete-branch
+```
+Use squash merge to keep main history clean.
 
-## Commit Style
+### 7. Cleanup
+```bash
+git checkout main
+git pull origin main
+```
+- Confirm the branch is deleted locally and on remote.
+- Show `git branch` to verify.
 
-See `.claude/commit-style.md` for the active style, format, examples, and reference table.
+### 8. Report
+- Show the merged PR URL
+- Confirm cleanup is complete
