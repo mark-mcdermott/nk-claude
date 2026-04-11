@@ -1,6 +1,6 @@
 ---
 name: ping
-description: Control peon-ping voice packs — check, list, or switch the current voice
+description: /ping [current|list|listall|<voice>] — check, list, or switch peon-ping voice
 usage: /ping [current|list|listall|<voice>]
 examples:
   - /ping current

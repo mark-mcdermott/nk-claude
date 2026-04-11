@@ -78,11 +78,14 @@ Common integrations: UploadThing (file/avatar storage), Stripe (pay-tier), Strip
 
 ## Available Skills
 
-Run `/skills` to list all installed skills. Key ones:
+Run `/skills` to list all installed skills.
 
-- `/b <branch> <feature>` — full lifecycle: branch, design, TDD, review, QA, PR, merge, cleanup
+- `/b <branch> <feature>` — branch, design, TDD, review, QA, PR, merge, cleanup
 - `/w <branch> <feature>` — same as `/b` but in an isolated worktree
 - `/wd <branch> <feature>` — same as `/w` but with a database copy
 - `/cpr` — commit, push, create PR
+- `/cprmc` — commit, PR, merge, cleanup (full branch wrap-up)
 - `/a` — abandon branch (stash, switch to main, delete branch)
 - `/c` — cleanup (stash, delete unused branches and worktrees)
+- `/ping [current|list|listall|<voice>]` — check, list, or switch peon-ping voice
+- `/skills` — list all custom skills

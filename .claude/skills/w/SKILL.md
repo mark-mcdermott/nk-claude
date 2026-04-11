@@ -1,7 +1,7 @@
 ---
 name: w
-description: Create a worktree and build a feature — full /b lifecycle in an isolated worktree
-usage: /w [branch-name] [feature description]
+description: /w <branch> <feature> — same as /b but in an isolated worktree
+usage: /w <branch> <feature>
 examples:
   - /w login-fix fix the login redirect loop on expired sessions
   - /w merch-store add a merch store page with product grid

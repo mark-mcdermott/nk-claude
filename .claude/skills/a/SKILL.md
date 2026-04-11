@@ -1,6 +1,6 @@
 ---
 name: a
-description: Abandon the current branch — stash any work, switch to main, and delete the branch
+description: /a — abandon branch (stash, switch to main, delete branch)
 usage: /a
 examples:
   - /a

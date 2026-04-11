@@ -1,7 +1,7 @@
 ---
 name: wd
-description: Create a worktree with a database copy and build a feature — full /w lifecycle with isolated database
-usage: /wd [branch-name] [feature description]
+description: /wd <branch> <feature> — same as /w but with a database copy
+usage: /wd <branch> <feature>
 examples:
   - /wd schema-migration restructure the user table for multi-tenancy
   - /wd fix-payments fix the Stripe webhook handler for failed charges

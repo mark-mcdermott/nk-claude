@@ -1,6 +1,6 @@
 ---
 name: cpr
-description: commit and PR — Commit all changes, push, and create a PR in one step
+description: /cpr — commit, push, create PR
 usage: /cpr
 allowed-tools:
   - Bash(git:*)

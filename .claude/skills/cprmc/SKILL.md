@@ -1,6 +1,6 @@
 ---
 name: cprmc
-description: Commit, PR, merge, and cleanup — full branch wrap-up in one shot
+description: /cprmc — commit, PR, merge, cleanup (full branch wrap-up)
 usage: /cprmc
 allowed-tools:
   - Bash(git:*)
