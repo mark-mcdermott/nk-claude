@@ -1,6 +1,6 @@
 ---
 name: c
-description: Stash uncommitted work, delete unused branches, and remove unused worktrees
+description: /c — cleanup (stash, delete unused branches and worktrees)
 usage: /c
 examples:
   - /c

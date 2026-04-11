@@ -1,7 +1,7 @@
 ---
 name: b
-description: Create a branch and build a feature — full lifecycle from design through merged PR and cleanup
-usage: /b [branch-name] [feature description]
+description: /b <branch> <feature> — branch, design, TDD, review, QA, PR, merge, cleanup
+usage: /b <branch> <feature>
 examples:
   - /b login-fix fix the login redirect loop on expired sessions
   - /b merch-store add a merch store page with product grid and Stripe checkout

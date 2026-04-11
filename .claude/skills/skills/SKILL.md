@@ -1,6 +1,6 @@
 ---
 name: skills
-description: List all custom skills with their name and one-line description
+description: /skills — list all custom skills
 usage: /skills
 examples:
   - /skills
