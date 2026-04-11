@@ -77,4 +77,3 @@ EOF
 ## Commit Style
 
 See `.claude/commit-style.md` for the active style, format, examples, and reference table.
-
