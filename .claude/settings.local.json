@@ -10,7 +10,13 @@
       "WebSearch",
       "Bash",
       "Agent",
-      "Skill"
+      "Skill",
+      "Bash(cp /Users/stuxxnet/Dev/mm-claude-starter/.claude/skills/w/SKILL.md /Users/stuxxnet/.claude/skills/w/SKILL.md)",
+      "Bash(cp /Users/stuxxnet/Dev/mm-claude-starter/.claude/skills/wd/SKILL.md /Users/stuxxnet/.claude/skills/wd/SKILL.md)",
+      "Read(//Users/stuxxnet/.claude/skills/w/**)",
+      "Read(//Users/stuxxnet/.claude/skills/wd/**)",
+      "Bash(cp /Users/stuxxnet/Dev/mm-claude-starter/.claude/skills/c/SKILL.md /Users/stuxxnet/.claude/skills/c/SKILL.md)",
+      "Read(//Users/stuxxnet/.claude/skills/c/**)"
     ],
     "deny": [
       "Bash(rm -rf *)",

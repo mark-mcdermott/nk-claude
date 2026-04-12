@@ -49,12 +49,15 @@ Parse arguments the same way as `/b` (first word = branch name if slug-like, res
 Infer the prefix (`feat/`, `fix/`, `refactor/`) from the feature description if none given.
 
 ```bash
-REPO_DIR=$(pwd)
-PARENT_DIR=$(dirname "$REPO_DIR")
+REPO_DIR=$(git rev-parse --show-toplevel)
+WORKTREES_DIR="$REPO_DIR/worktrees"
 BRANCH_NAME="<prefix>/<branch-name>"
-WORKTREE_PATH="$PARENT_DIR/<branch-name>"
+WORKTREE_PATH="$WORKTREES_DIR/<branch-name>"
+mkdir -p "$WORKTREES_DIR"
 git worktree add "$WORKTREE_PATH" -b "$BRANCH_NAME"
 ```
+
+Worktrees always live in `<repo-root>/worktrees/<branch-name>`. Create the `worktrees/` directory if it doesn't exist.
 
 Save both `REPO_DIR` and `WORKTREE_PATH` — you need both for cleanup.
 
@@ -92,13 +95,19 @@ All git commands still prefixed with `cd <WORKTREE_PATH> &&` until the worktree 
 After the PR is merged and branch is deleted:
 
 ```bash
-cd <REPO_DIR>
+cd "$REPO_DIR"
 git worktree remove "$WORKTREE_PATH"
 ```
 
 If removal fails:
 ```bash
 git worktree remove --force "$WORKTREE_PATH"
+```
+
+Then remove the `worktrees/` directory **only if it is now empty** (i.e., this was the last remaining worktree). If other worktrees still exist in there, leave the directory alone.
+
+```bash
+rmdir "$WORKTREES_DIR" 2>/dev/null || true
 ```
 
 Verify:
