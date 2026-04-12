@@ -47,25 +47,42 @@ git branch -D <branch-name>
 
 **Only local branches.** Do not touch remote branches.
 
-### 4. Remove All Non-Main Worktrees
+### 4. Remove Safe Non-Main Worktrees
 
+List worktrees (skip the main one):
 ```bash
-git worktree list
+git worktree list --porcelain
 ```
 
-For every worktree that is NOT the main working tree (the first entry, or the one matching the repo root):
+**For each non-main worktree, check if it's safe to remove.** A worktree is safe only when BOTH are true:
+
+1. **Clean working tree** — no staged, unstaged, or untracked files:
+   ```bash
+   test -z "$(git -C <worktree-path> status --porcelain)"
+   ```
+2. **No unpushed commits** — the branch's HEAD matches (or is behind) its upstream, OR the branch is fully reachable from `origin/main`:
+   ```bash
+   # unpushed commits (empty output = safe on this check)
+   git -C <worktree-path> log @{u}..HEAD --oneline 2>/dev/null
+   # or, if no upstream, check against origin/main
+   git -C <worktree-path> log origin/main..HEAD --oneline
+   ```
+
+**Never use `--force`.** If a worktree is not safe, skip it and record why (dirty / unpushed commits / active work in another pane). Report skips in the summary.
+
+For safe worktrees:
 ```bash
 git worktree remove <worktree-path>
-```
-
-If removal fails (uncommitted changes in worktree):
-```bash
-git worktree remove --force <worktree-path>
 ```
 
 Prune stale references:
 ```bash
 git worktree prune
+```
+
+Then, if `<repo-root>/worktrees/` exists and is now empty, remove it. Leave it alone if any worktrees remain inside.
+```bash
+rmdir "$(git rev-parse --show-toplevel)/worktrees" 2>/dev/null || true
 ```
 
 ### 5. Report
@@ -74,4 +91,5 @@ Print a summary:
 - What was stashed (if anything), remind user it's in `git stash list`
 - Which branches were deleted (list them)
 - Which worktrees were removed (list them)
+- Which worktrees were **skipped** and why (dirty / unpushed commits)
 - Current state: on `main`, clean working tree, up to date

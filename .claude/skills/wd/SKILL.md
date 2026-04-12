@@ -36,7 +36,7 @@ Exactly like `/w` (full lifecycle in a worktree), but also creates a copy of the
 
 ### 1. Create Worktree
 
-Same as `/w` step 1 — parse arguments, create worktree, save `REPO_DIR` and `WORKTREE_PATH`, install dependencies.
+Same as `/w` step 1 — parse arguments, create worktree at `<repo-root>/worktrees/<branch-name>` (creating `worktrees/` if absent), save `REPO_DIR`, `WORKTREES_DIR`, and `WORKTREE_PATH`, install dependencies.
 
 ### 2. Copy Database
 
