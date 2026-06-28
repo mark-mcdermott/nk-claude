@@ -28,64 +28,39 @@ Zero references to Claude/AI anywhere — not in commits, PRs, co-author lines, 
 
 ## Defaults
 
-- **Commit style**: Conventional commits — `type(scope): description`, lowercase, no period
-- **Permissions**: Loose — full Read/Edit/Write/Bash/Agent/Skill, with deny rules for `rm -rf`, `sudo`, `force push`, `reset --hard`
-- **Output style**: None (standard Claude output). Set `"outputStyle"` in `settings.local.json` to a path like `.claude/output-styles/grug-speak.md` to change it.
+Global fallback defaults — a project gets these unless its own `<project>/.claude/settings.json` overrides:
 
-Alternative presets are in `.claude/saved-presets/` (gitmoji commits, tight permissions). Two caveman-style output options are in `.claude/output-styles/`.
+- **Commit style**: `conventional` — `type(scope): description`, lowercase, no period
+- **Permissions**: `loose` — full Read/Edit/Write/Bash/Agent/Skill, with deny rules for `rm -rf`, `sudo`, `force push`, `reset --hard`
+- **Automerge**: `off` — `/branch` opens the PR and stops; it does not merge unless the project opts in
+
+Per-project config lives in `<project>/.claude/settings.json` (keys: `permissions`, `commitStyle`, `automerge`, `stack`). `permissions` is enforced by the harness; the rest are read by the build skills. Use **`/new`** to stamp these when starting a project and **`/preset <axis> <value>`** to change one later. Preset source blobs (loose/tight permissions, conventional/gitmoji commit style) are in `~/.claude/saved-presets/`.
 
 
-## Cleanroom Component Library
+## Stacks
 
-Most projects use Cleanroom — a shared component/block/module library built on shadcn-ui.
-
-- **Location**: `~/Dev/cleanroom-proj/cleanroom` — also [github.com/mark-mcdermott/cleanroom](https://github.com/mark-mcdermott/cleanroom) and [cleanroom.website](https://cleanroom.website)
-- Before building new UI components, check Cleanroom for an existing match
-- If a Cleanroom component exists, use it (adapt CSS/Tailwind classes for the project's skin)
-- After implementation, note new components or skin elements to contribute back
-- Each project has its own "skin" — nearly all differences are CSS/Tailwind classes, occasionally different HTML markup
-
-## Stack: ZENCATS
-
-Most projects use the ZENCATS stack:
-- **Z**od — validation, schemas, form validation, API I/O
-- **E**dge — Neon (serverless Postgres) + Vercel deployment
-- **N**ext.js — App Router, TypeScript strict
-- **C**apacitor — mobile builds
-- **A**uth — hand-rolled (no third-party auth libraries)
-- **T**auri — desktop builds
-- **S**hadcn-ui + Tailwind CSS
-- (and Drizzle — ORM, schemas in `src/db/schema/`, migrations via `drizzle-kit`)
-
-Common integrations: UploadThing (file/avatar storage), Stripe (pay-tier), Stripe+Printful (merch store). Most projects have a dark/light theme toggle and user dropdown with Account settings.
+Stack acronyms (ZENCATS, RAVEHANDS, RATS, TANS, REST), their expansions, per-project assignments, the auth rule of thumb, and common integrations live in `~/Dev/_PROJECTS.md`. Stack is a per-project fact, not a global setting — each project records its own in `<project>/.claude/settings.json` (`stack` key) and its CLAUDE.md. Read `_PROJECTS.md` when the taxonomy matters (scaffolding a new app, migrating a legacy one).
 
 ## Projects
 
-| Project | Description | Local | GitHub | Live |
-|---------|-------------|-------|--------|------|
-| cleanroom | Component library & app scaffolding CLI | `~/Dev/cleanroom-proj/cleanroom` | [repo](https://github.com/mark-mcdermott/cleanroom) | [cleanroom.website](https://cleanroom.website) |
-| diamondheart | Habit tracker — "whole life", health & meditation (75%) | `~/Dev/diamondheart-proj/diamondheart` | [repo](https://github.com/mark-mcdermott/diamondheart) | [diamondheart.app](https://diamondheart.app) |
-| frunk | Car docs storage app (80%) | `~/Dev/frunk-proj/frunk` | [repo](https://github.com/mark-mcdermott/frunk) | [frunk.cloud](https://frunk.cloud) |
-| hoobie | Kanban app for personal goals (80%) | `~/Dev/hoobie-proj/hoobie` | [repo](https://github.com/mark-mcdermott/hoobie) | [hoobie.app](https://hoobie.app) |
-| markmcdermott.io | Dev portfolio site | `~/Dev/markmcdermott.io-proj/markmcdermott.io` | [repo](https://github.com/mark-mcdermott/markmcdermott.io) | [markmcdermott.io](https://markmcdermott.io) |
-| mm-claude-starter | Claude starter skills & CLAUDE.md | `~/Dev/mm-claude-starter` | [repo](https://github.com/mark-mcdermott/mm-claude-starter) | — |
-| sidvid | AI video app (25%) | `~/Dev/sidvid-proj/sidvid` | [repo](https://github.com/mark-mcdermott/sidvid) | [sidvid.ai](https://sidvid.ai) |
-| theme-forseen | NPM package — sidebar color/font scheme picker for dev (90%) | `~/Dev/theme-forseen-proj/theme-forseen` | [repo](https://github.com/mark-mcdermott/theme-forseen) | [npm](https://www.npmjs.com/package/theme-forseen) |
-| themeforseen.com | Website for theme-forseen | `~/Dev/themeforseen.com-proj/themeforseen.com` | [repo](https://github.com/mark-mcdermott/themeforseen.com) | [themeforseen.com](https://themeforseen.com) |
-| xin | Note-taking & blog publishing app, desktop only (80%) | `~/Dev/xin-proj/xin` | [repo](https://github.com/mark-mcdermott/xin) | [xin.pink](https://xin.pink) |
-| floating.is | Fun visualizer of people on a floating island (25%) | `~/Dev/floating.is-proj/floating.is` | [repo](https://github.com/mark-mcdermott/floating.is) | [floating.is](https://floating.is) |
-| non-dinos | Presentation on cool prehistoric non-dinosaur animals (90%) | `~/Dev/non-dinos-proj/non-dinos` | [repo](https://github.com/mark-mcdermott/non-dinos) | [nondinos.com](https://nondinos.com) |
+The full roster, the "Next up" priority list, and per-project stacks live in `~/Dev/_PROJECTS.md` — kept current there, not here.
 
 ## Available Skills
 
-Run `/skills` to list all installed skills.
+Run `/list-skills` to list all installed skills.
 
-- `/b <branch> <feature>` — branch, design, TDD, review, QA, PR, merge, cleanup
-- `/w <branch> <feature>` — same as `/b` but in an isolated worktree
-- `/wd <branch> <feature>` — same as `/w` but with a database copy
-- `/cpr` — commit, push, create PR
-- `/cprmc` — commit, PR, merge, cleanup (full branch wrap-up)
-- `/a` — abandon branch (stash, switch to main, delete branch)
-- `/c` — cleanup (stash, delete unused branches and worktrees)
+- `/branch <branch> <feature>` — branch, design, TDD, review, QA, PR, (auto)merge, cleanup
+- `/worktree <branch> <feature>` — same as `/branch` but in an isolated worktree
+- `/worktree-db <branch> <feature>` — same as `/worktree` but with a database copy
+- `/commit-push-pr` — commit, push, create PR
+- `/wrap` — commit, PR, merge, cleanup (full branch wrap-up)
+- `/abandon` — abandon branch (stash, switch to main, delete branch)
+- `/cleanup` — cleanup (stash, delete unused branches and worktrees)
 - `/ping [current|list|listall|<voice>]` — check, list, or switch peon-ping voice
-- `/skills` — list all custom skills
+- `/list-skills` — list all custom skills
+- `/new <name> <stack>` — bootstrap a project: scaffold + stamp `.claude/settings.json` (permissions · commit style · automerge · stack)
+- `/preset [<axis> <value>]` — show or set this project's config (commit · permissions · automerge · stack)
+- `/modernize` — coaching conversation to bring my workflow current (orchestration, background agents, memory, external actions)
+- `/orchestrate <feature>` — multi-agent upgrade to `/branch`: decompose, parallel implement, adversarial review, verify-by-running
+- `/watch <target> — notify when <condition>` — background watcher for deploys / PRs / CI (push or email)
+- `/standup [project|all]` — cross-repo status: what changed, what's stale, what's next by priority
