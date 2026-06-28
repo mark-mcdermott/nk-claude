@@ -1,7 +1,7 @@
 ---
-name: cprmc
-description: /cprmc — commit, PR, merge, cleanup (full branch wrap-up)
-usage: /cprmc
+name: wrap
+description: /wrap — commit, PR, merge, cleanup (full branch wrap-up)
+usage: /wrap
 allowed-tools:
   - Bash(git:*)
   - Bash(gh:*)
@@ -29,7 +29,7 @@ git add [files]
 - Save the branch name for cleanup later.
 
 ### 3. Commit
-Read `.claude/commit-style.md` for the current commit style. If it doesn't exist, check `.claude/saved-presets/commit-style-conventional.md`. Write the commit message following that style exactly.
+Read `commitStyle` from `<project>/.claude/settings.json` (`conventional` if absent) and write the commit message following that style exactly — its format lives in `~/.claude/saved-presets/commit-style-<style>.md`.
 
 **Commit rules (CRITICAL)**:
 - Follow the format and rules in the commit style file.

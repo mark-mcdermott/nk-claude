@@ -1,11 +1,11 @@
 ---
-name: b
-description: /b <branch> <feature> — branch, design, TDD, review, QA, PR, merge, cleanup
-usage: /b <branch> <feature>
+name: branch
+description: /branch <branch> <feature> — branch, design, TDD, review, QA, PR, (auto)merge, cleanup
+usage: /branch <branch> <feature>
 examples:
-  - /b login-fix fix the login redirect loop on expired sessions
-  - /b merch-store add a merch store page with product grid and Stripe checkout
-  - /b add a dark mode toggle to the settings panel
+  - /branch login-fix fix the login redirect loop on expired sessions
+  - /branch merch-store add a merch store page with product grid and Stripe checkout
+  - /branch add a dark mode toggle to the settings panel
 allowed-tools:
   - Bash(npx:*)
   - Bash(git:*)
@@ -26,7 +26,7 @@ allowed-tools:
 
 # Branch and Build Skill
 
-Create a branch, design, implement (TDD), review, QA, PR, merge, and clean up — fully autonomous. **Never ask the user for details or confirmation.** Assess available options and choose the best one.
+Create a branch, design, implement (TDD), review, QA, and open a PR — fully autonomous. Whether it then merges and cleans up depends on the project's `automerge` setting (default off). **Never ask the user for details or confirmation.** Assess available options and choose the best one.
 
 ## Arguments
 
@@ -53,7 +53,7 @@ These rules apply to ALL code written during this skill. Re-read after context c
 ```bash
 git status
 ```
-If dirty, stash first: `git stash push -m "b: auto-stash before branching"`.
+If dirty, stash first: `git stash push -m "branch: auto-stash before branching"`.
 
 Infer the appropriate prefix from the feature description if the branch name has no prefix:
 - New functionality → `feat/`
@@ -75,12 +75,7 @@ Before writing any code:
    - Test patterns and conventions
    - `package.json` scripts and dependencies
 
-2. **Check Cleanroom** — if the feature involves UI components, check the Cleanroom component library for existing components:
-   - Look in `../../cleanroom-proj/cleanroom` (relative to project root)
-   - If a matching Cleanroom component exists, use it (adapt CSS/Tailwind classes for this project's skin)
-   - Note any new components or skin elements to contribute back after implementation
-
-3. **Never recreate** what already exists in the project or its dependencies.
+2. **Never recreate** what already exists in the project or its dependencies.
 
 ### 3. Design (UI Features)
 
@@ -104,7 +99,7 @@ If the feature is complex (multiple files, sub-features, frontend + backend):
 
 1. Create a numbered checklist of steps ordered by dependency
 2. Use `TaskCreate` for each step
-3. Write the checklist to `.claude/b-progress.md` (survives context compression)
+3. Write the checklist to `.claude/branch-progress.md` (survives context compression)
 
 Simple features (single component, single fix) — skip the checklist, implement directly.
 
@@ -112,25 +107,24 @@ Simple features (single component, single fix) — skip the checklist, implement
 
 For each feature or checklist step:
 
-**Re-read `.claude/b-progress.md` before each step** (essential after context compression).
+**Re-read `.claude/branch-progress.md` before each step** (essential after context compression).
 
-#### a. Write Playwright Tests
+#### a. Write Tests
 
-All tests use Playwright. Write tests that cover:
+Match the project's existing test setup. Default split for the Vite/React stacks (RATS · REST · RAVEHANDS · ZENCATS) and Next (TANS):
+- **Vitest** — unit & component logic (functions, hooks, components via Testing Library)
+- **Playwright** — end-to-end flows (real browser, user journeys)
+
+Write whichever fits the change (often both), covering:
 - Happy path(s)
 - Edge cases (empty states, error states, boundary values)
 - Accessibility where relevant (keyboard nav, screen reader labels)
 
-Follow existing test conventions. Place tests where the project's tests live.
+Follow existing test conventions and place tests where the project's tests live. Prefer the project's own `package.json` scripts when present — e.g. `npm run test` (Vitest), `npm run test:e2e` (Playwright) — else fall back to `npx vitest run` / `npx playwright test`.
 
 #### b. Confirm Failure
 
-```bash
-npx playwright test <test-file> --reporter=list
-```
-
-Tests **must fail**. If they pass, they're not testing anything new — revise.
-Confirm they fail for the right reason (missing feature, not syntax error).
+Run the new tests. They **must fail** — if they pass, they're not testing anything new, so revise. Confirm they fail for the right reason (missing feature, not a syntax error).
 
 #### c. Implement
 
@@ -138,24 +132,17 @@ Build the feature following the **Implementation Rules** above.
 
 #### d. Run Tests & Fix
 
-```bash
-npx playwright test <test-file> --reporter=list
-```
-
+Re-run the new tests:
 - **Pass** → continue
 - **Fail** → fix the implementation (never weaken the test), rerun. Cycle until green.
 
 #### e. Full Suite Check
 
-```bash
-npx playwright test --reporter=list
-```
-
-Fix any regressions before moving on.
+Run the full suite (unit + e2e). Fix any regressions before moving on.
 
 #### f. Commit
 
-**Commit style cascade**: Read `.claude/commit-style.md`. If it doesn't exist, read `~/.claude/defaults/commit-style.md`. If neither exists, use conventional commits.
+**Commit style**: Read `commitStyle` from `<project>/.claude/settings.json` (`conventional` if absent), then read its format from `~/.claude/saved-presets/commit-style-<style>.md`.
 
 ```bash
 git add <relevant files>
@@ -168,7 +155,7 @@ Commit at every natural boundary — after each passing feature, each checklist 
 
 #### g. Update Progress
 
-If using a checklist, update `.claude/b-progress.md` and mark the `TaskUpdate` as completed.
+If using a checklist, update `.claude/branch-progress.md` and mark the `TaskUpdate` as completed.
 
 ### 6. Security Review
 
@@ -266,7 +253,7 @@ gh pr create --title "<clear description, under 70 chars>" --body "$(cat <<'EOF'
 - <key changes>
 
 ## Testing
-- <Playwright e2e, security review, code review, QA>
+- <Vitest unit + Playwright e2e, security review, code review, QA>
 
 ## QA Instructions
 <paste QA instructions from step 8a>
@@ -276,7 +263,12 @@ EOF
 
 **CRITICAL**: No AI attribution anywhere in the PR.
 
-#### e. Merge PR
+#### e. Merge? Check the `automerge` setting
+
+Read `automerge` from `<project>/.claude/settings.json` (default `false`).
+
+- **`false` (default)** → **stop here.** Report the PR URL and what was built; leave it open for the user to review and merge. Skip step f.
+- **`true`** → merge it:
 
 ```bash
 gh pr merge --squash --delete-branch
@@ -289,7 +281,7 @@ git checkout <branch> && git merge main
 ```
 Resolve conflicts, commit, push, retry merge. Cycle until merged.
 
-#### f. Clean Up
+#### f. Clean Up (only if merged)
 
 ```bash
 git checkout main
@@ -297,16 +289,10 @@ git pull origin main
 git branch -D <branch-name> 2>/dev/null
 ```
 
-Delete `.claude/b-progress.md` if it exists.
+Delete `.claude/branch-progress.md` if it exists.
 
 Report to the user: what was built, tests passing, PR merged.
 
-#### g. Cleanroom Contribution
+## Commit Style
 
-If new UI components or skin elements were created, note them in the final report as candidates for contributing back to Cleanroom (`../../cleanroom-proj/cleanroom`).
-
-## Commit Style Cascade
-
-1. `.claude/commit-style.md` (project level)
-2. `~/.claude/defaults/commit-style.md` (global default)
-3. Conventional commits (final fallback)
+Read `commitStyle` from `<project>/.claude/settings.json` (`conventional` if the key/file is absent). The full format for each style lives in `~/.claude/saved-presets/commit-style-<style>.md` (`conventional` or `gitmoji`).

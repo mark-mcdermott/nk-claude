@@ -1,7 +1,7 @@
 ---
-name: cpr
-description: /cpr — commit, push, create PR
-usage: /cpr
+name: commit-push-pr
+description: /commit-push-pr — commit, push, create PR
+usage: /commit-push-pr
 allowed-tools:
   - Bash(git:*)
   - Bash(gh:*)
@@ -27,10 +27,10 @@ git add [files]
 ```
 
 ### 3. Commit
-Read `.claude/commit-style.md` for the current commit style. Write the commit message following that style exactly.
+Read `commitStyle` from `<project>/.claude/settings.json` (`conventional` if absent) and write the commit message following that style exactly — its format lives in `~/.claude/saved-presets/commit-style-<style>.md`.
 
 **Commit rules (CRITICAL)**:
-- Follow the format and rules in `.claude/commit-style.md`.
+- Follow the format and rules in `~/.claude/saved-presets/commit-style-<style>.md` for the project's `commitStyle`.
 - No AI attribution. No co-author lines, no signatures, no references to Claude/AI.
 - Commit as the developer, never as Claude.
 
@@ -76,4 +76,4 @@ EOF
 
 ## Commit Style
 
-See `.claude/commit-style.md` for the active style, format, examples, and reference table.
+The active style is the project's `commitStyle` key in `<project>/.claude/settings.json` (default `conventional`); its format, examples, and reference table live in `~/.claude/saved-presets/commit-style-<style>.md`.

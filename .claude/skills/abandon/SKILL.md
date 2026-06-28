@@ -1,9 +1,9 @@
 ---
-name: a
-description: /a — abandon branch (stash, switch to main, delete branch)
-usage: /a
+name: abandon
+description: /abandon — abandon branch (stash, switch to main, delete branch)
+usage: /abandon
 examples:
-  - /a
+  - /abandon
 allowed-tools:
   - Bash(git:*)
 ---

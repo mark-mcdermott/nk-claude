@@ -1,9 +1,9 @@
 ---
-name: c
-description: /c — cleanup (stash, delete unused branches and worktrees)
-usage: /c
+name: cleanup
+description: /cleanup — cleanup (stash, delete unused branches and worktrees)
+usage: /cleanup
 examples:
-  - /c
+  - /cleanup
 allowed-tools:
   - Bash(git:*)
 ---

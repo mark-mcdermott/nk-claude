@@ -1,10 +1,10 @@
 ---
-name: wd
-description: /wd <branch> <feature> — same as /w but with a database copy
-usage: /wd <branch> <feature>
+name: worktree-db
+description: /worktree-db <branch> <feature> — same as /worktree but with a database copy
+usage: /worktree-db <branch> <feature>
 examples:
-  - /wd schema-migration restructure the user table for multi-tenancy
-  - /wd fix-payments fix the Stripe webhook handler for failed charges
+  - /worktree-db schema-migration restructure the user table for multi-tenancy
+  - /worktree-db fix-payments fix the Stripe webhook handler for failed charges
 allowed-tools:
   - Bash(npx:*)
   - Bash(git:*)
@@ -30,13 +30,13 @@ allowed-tools:
 
 # Worktree + Database Copy Build Skill
 
-Exactly like `/w` (full lifecycle in a worktree), but also creates a copy of the database. All work uses the copy — the original database is never touched. **Never ask the user for details or confirmation.**
+Exactly like `/worktree` (full lifecycle in a worktree), but also creates a copy of the database. All work uses the copy — the original database is never touched. **Never ask the user for details or confirmation.**
 
 ## Workflow
 
 ### 1. Create Worktree
 
-Same as `/w` step 1 — parse arguments, create worktree at `<repo-root>/worktrees/<branch-name>` (creating `worktrees/` if absent), save `REPO_DIR`, `WORKTREES_DIR`, and `WORKTREE_PATH`, install dependencies.
+Same as `/worktree` step 1 — parse arguments, create worktree at `<repo-root>/worktrees/<branch-name>` (creating `worktrees/` if absent), save `REPO_DIR`, `WORKTREES_DIR`, and `WORKTREE_PATH`, install dependencies.
 
 ### 2. Copy Database
 
@@ -78,11 +78,11 @@ Use the `Edit` tool on `<WORKTREE_PATH>/.env.local` to swap the database connect
 
 Save `COPY_DB` (or connection string) for cleanup.
 
-### 3. Execute Full /w Workflow
+### 3. Execute Full /worktree Workflow
 
-Follow **every step** of the `/w` skill (which follows `/b`), using the copy database.
+Follow **every step** of the `/worktree` skill (which follows `/branch`), using the copy database.
 
-All worktree path rules from `/w` apply. All implementation rules from `/b` apply.
+All worktree path rules from `/worktree` apply. All implementation rules from `/branch` apply.
 
 All database operations — migrations, seeds, queries — run against the copy.
 
@@ -105,8 +105,8 @@ neonctl branches delete --project-id <project-id> <branch-id>
 rm <WORKTREE_PATH>/<db-file>.copy
 ```
 
-### 5. Continue /w Cleanup
+### 5. Continue /worktree Cleanup
 
-Complete the remaining `/w` steps: PR (no AI attribution), merge (handle conflicts), checkout main, delete branch, remove worktree.
+Complete the remaining `/worktree` steps: PR (no AI attribution), merge (handle conflicts), checkout main, delete branch, remove worktree.
 
 Report to the user: what was built, tests passing, database copy deleted, PR merged, worktree cleaned up.

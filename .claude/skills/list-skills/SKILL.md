@@ -1,9 +1,9 @@
 ---
-name: skills
-description: /skills — list all custom skills
-usage: /skills
+name: list-skills
+description: /list-skills — list all custom skills
+usage: /list-skills
 examples:
-  - /skills
+  - /list-skills
 allowed-tools:
   - Glob
   - Read
@@ -35,8 +35,8 @@ Print a compact table, sorted alphabetically by name:
 ```
 Skill             Description
 ─────             ───────────
-/a                Abandon the current branch — stash, switch to main, delete branch
-/b                Create a branch and build a feature — full lifecycle
+/abandon                Abandon the current branch — stash, switch to main, delete branch
+/branch                Create a branch and build a feature — full lifecycle
 ...
 ```
 
